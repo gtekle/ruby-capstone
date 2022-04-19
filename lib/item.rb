@@ -29,4 +29,13 @@ class Item
     @genre = genre
     genre.items.push(self) unless genre.items.includes?(self)
   end
+
+  def can_be_archived?
+    true if (@publish_date.year - Time.now.year) > 10
+    false
+  end
+
+  def move_to_archive
+    @archived = true if can_be_archived?
+  end
 end
